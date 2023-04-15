@@ -1,2 +1,0 @@
-C:\Users\baohe\Downloads\gamedev-intro-tutorials-master\gamedev-intro-tutorials-master\01-Skeleton\Debug\01-Skeleton.vcxproj.CopyComplete
-C:\Programming\Template\01-Skeleton\Debug\01-Skeleton.vcxproj.CopyComplete
