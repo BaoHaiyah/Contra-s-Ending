@@ -1,5 +1,7 @@
-﻿  GameObject.cpp
+﻿  debug.cpp
+  Game.cpp
+  GameObject.cpp
   Main.cpp
   State.cpp
   Generating Code...
-  Test.vcxproj -> C:\Programming\Test\x64\Debug\Test.exe
+  Test.vcxproj -> C:\Users\baohe\source\repos\Contra-s-Ending\x64\Debug\Test.exe

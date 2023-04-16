@@ -1,1 +1,2 @@
 C:\Programming\Test\Test\x64\Debug\Test.vcxproj.CopyComplete
+C:\Users\baohe\source\repos\Contra-s-Ending\Test\x64\Debug\Test.vcxproj.CopyComplete
