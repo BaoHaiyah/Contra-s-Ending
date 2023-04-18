@@ -8,13 +8,12 @@
 
 #define Gravity 2
 
+RECT Bill_Standing[2] = {{1, 30, 25, 65}, {26, 30, 50, 65}};
+
 Standing::Standing(float vs, float x, float y, float hs) : State(0, 2, vs, x, y, hs) {
-	frames = new RECT[2]{
-		{1, 30, 25, 65},
-		{26, 30, 50, 65}
-	};
+	frames = Bill_Standing;
 }
-State* Standing::Update() {
+State* Standing::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	if (GetKeyState(VK_DOWN) & 0x8000) {
 		return new Lay_Down(0, 0, 10);
 	}
@@ -40,7 +39,7 @@ Running::Running(float vs, float x, float y, float hs) : State(0, 6, vs, x, y, h
 		{102, 66, 122, 102},
 	};
 }
-State* Running::Update() {
+State* Running::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	if (GetKeyState(VK_DOWN) & 0x8000) {
 		return new Lay_Down(0, 0, 10);
 	}
@@ -67,7 +66,7 @@ Jumping::Jumping(float vs, float x, float y, float hs) : State(0, 4, vs, x, y, h
 		{174, 44, 194, 65},
 	};
 }
-State* Jumping::Update() {
+State* Jumping::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	if (verticalSpeed == 0) {
 		return new Standing();
 	}
@@ -79,7 +78,7 @@ Lay_Down::Lay_Down(float vs, float x, float y, float hs) : State(0, 1, vs, x, y,
 		{83, 48, 116, 65},
 	};
 }
-State* Lay_Down::Update() {
+State* Lay_Down::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	if (!(GetKeyState(VK_DOWN) & 0x8000)) {
 		return new Standing();
 	}
@@ -92,7 +91,7 @@ Shot_Up::Shot_Up(float vs, float x, float y, float hs) : State(0, 2, vs, x, y, h
 		{67, 19, 82, 65},
 	};
 }
-State* Shot_Up::Update() {
+State* Shot_Up::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	if ((GetKeyState(VK_DOWN) & 0x8000)) {
 		return new Lay_Down(0, 0, 10);
 	}
@@ -115,7 +114,7 @@ Running_Shot_Up::Running_Shot_Up(float vs, float x, float y, float hs) : State(0
 		{163, 66, 183, 102},
 	};
 }
-State* Running_Shot_Up::Update() {
+State* Running_Shot_Up::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	if ((GetKeyState(VK_UP) & 0x8000)) {
 		return new Jumping();
 	}
@@ -135,7 +134,7 @@ Running_Shot_Down::Running_Shot_Down(float vs, float x, float y, float hs) : Sta
 		{229, 66, 251, 102},
 	};
 }
-State* Running_Shot_Down::Update() {
+State* Running_Shot_Down::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	if ((GetKeyState(VK_UP) & 0x8000)) {
 		return new Jumping();
 	}
@@ -154,7 +153,7 @@ Swimming::Swimming(float vs, float x, float y, float hs) : State(0, 2, vs, x, y,
 		{130, 115, 147, 131},
 	};
 }
-State* Swimming::Update() {
+State* Swimming::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	return this;
 }
 
@@ -163,7 +162,7 @@ Diving::Diving(float vs, float x, float y, float hs) : State(0, 1, vs, x, y, hs)
 		{112, 123, 129, 131},
 	};
 }
-State* Diving::Update() {
+State* Diving::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	return this;
 }
 
@@ -172,7 +171,7 @@ Swimming_Shot::Swimming_Shot(float vs, float x, float y, float hs) : State(0, 1,
 		{191, 113, 217, 131},
 	};
 }
-State* Swimming_Shot::Update() {
+State* Swimming_Shot::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	return this;
 }
 
@@ -181,7 +180,7 @@ Swimming_Shot_Up::Swimming_Shot_Up(float vs, float x, float y, float hs) : State
 		{148, 113, 168, 131},
 	};
 }
-State* Swimming_Shot_Up::Update() {
+State* Swimming_Shot_Up::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	return this;
 }
 
@@ -190,7 +189,7 @@ Swimming_Stand_Shot_Up::Swimming_Stand_Shot_Up(float vs, float x, float y, float
 		{169, 103, 187, 131},
 	};
 }
-State* Swimming_Stand_Shot_Up::Update() {
+State* Swimming_Stand_Shot_Up::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	return this;
 }
 
@@ -202,6 +201,6 @@ Dead::Dead(float vs, float x, float y, float hs) : State(0, 4, vs, x, y, hs) {
 		{60, 120, 93, 131},
 	};
 }
-State* Dead::Update() {
+State* Dead::Update(bool up, bool down, bool left, bool right, bool lup, bool ldown, bool shoot) {
 	return this;
 }

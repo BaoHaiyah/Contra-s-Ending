@@ -61,6 +61,12 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+	case WM_KEYDOWN:
+		//bill->state = bill->state->Update();
+		break;
+	case WM_KEYUP:
+		//bill->state = bill->state->Update();
+		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
@@ -82,7 +88,7 @@ void LoadResources()
 	//texMisc = game->LoadTexture(MISC_TEXTURE_PATH);
 
 	bill = new CBill(BILL_START_X, BILL_START_Y, BILL_START_VX, BILL_START_VY, texBill);
-
+	bill->control = new Control(VK_UP, VK_DOWN, VK_LEFT, VK_RIGHT, 'W', 'S', VK_SPACE);
 	brick = new CBrick(BRICK_X, BRICK_Y, texBrick);
 
 	
@@ -102,6 +108,11 @@ void LoadResources()
 	Update world status for this frame
 	dt: time period between beginning of last frame and beginning of this frame
 */
+
+void GetKeyEvent(DWORD dt) {
+	bill->Update(dt);
+}
+
 void Update(DWORD dt)
 {
 	/*
@@ -109,7 +120,8 @@ void Update(DWORD dt)
 		objects[i]->Update(dt);
 	*/
 
-	bill->Update(dt);
+	//bill->Update(dt);
+	GetKeyEvent(dt);
 	brick->Update(dt);
 
 	//DebugOutTitle(L"01 - Skeleton %0.1f, %0.1f", mario->GetX(), mario->GetY());

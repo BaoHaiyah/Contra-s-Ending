@@ -45,17 +45,25 @@ CGameObject::~CGameObject()
 
 void CBill::Update(DWORD dt)
 {
-	state = state->Update();
+	if (control != NULL) {
+		state = state->Update(GetKeyState(control->Up) & 0x8000,
+			GetKeyState(control->Down) & 0x8000,
+			GetKeyState(control->Left) & 0x8000,
+			GetKeyState(control->Right) & 0x8000,
+			GetKeyState(control->Look_Up) & 0x8000,
+			GetKeyState(control->Look_Down) & 0x8000,
+			GetKeyState(control->Shoot) & 0x8000);
+	}
 	y += state->verticalSpeed;
 	state->verticalSpeed += Gravity;
 	if (y >= 160) {
 		y = 160;
 		state->verticalSpeed = 0;
 	}
-	if (GetKeyState(VK_LEFT) & 0x8000) {
+	if (GetKeyState(control->Left) & 0x8000) {
 		x += -state->horizontalSpeed;
 	}
-	if (GetKeyState(VK_RIGHT) & 0x8000) {
+	if (GetKeyState(control->Right) & 0x8000) {
 		x += state->horizontalSpeed;
 	}
 	//x += vx*dt;

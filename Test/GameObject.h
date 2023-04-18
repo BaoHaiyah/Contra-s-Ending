@@ -33,17 +33,26 @@ class CBrick : public CGameObject
 {
 public:
 	CBrick(float x, float y, LPTEXTURE texture): CGameObject(x,y,texture) {}
-	void Update(DWORD dt) {}; 
+	void Update(DWORD dt) {};
+};
+
+class Control {
+public:
+	wchar_t Up, Down, Left, Right, Look_Up, Look_Down, Shoot;
+	Control(wchar_t up, wchar_t down, wchar_t left, wchar_t right, wchar_t lup, wchar_t ldown, wchar_t shoot) : Up(up), Down(down), Left(left), Right(right), Look_Up(lup), Look_Down(ldown), Shoot(shoot) {};
 };
 
 class CBill : public CGameObject
 {
 	float vx;
 	float vy;
+public:
 	STATE state;
+	Control* control;
 public: 
 	CBill(float x, float y, float vx, float vy, LPTEXTURE texture) :CGameObject(x, y, texture)
 	{
+		control = NULL;
 		this->vx = vx;
 		this->vy = vy;
 		state = new Standing();
